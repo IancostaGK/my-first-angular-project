@@ -1,0 +1,25 @@
+<section class="frameworks">
+  <header class="frameworks__header">
+    <p class="frameworks__eyebrow">Frontend</p>
+    <h1>Framework Explorer</h1>
+    <p class="frameworks__subtitle">Type to filter the list in real time.</p>
+  </header>
+
+  <div class="frameworks__controls">
+    <input
+      type="text"
+      placeholder="Filter frameworks..."
+      aria-label="Filter frameworks"
+      [(ngModel)]="query"
+    />
+    {{  query }}
+    <button type="button" class="frameworks__clear" (click)="clearQuery()">
+      Clear
+    </button>
+  </div>
+
+  <app-framework-list
+    [items]="filteredFrameworks"
+    [query]="query"
+  />
+</section>

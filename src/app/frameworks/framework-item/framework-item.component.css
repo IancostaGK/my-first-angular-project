@@ -1,0 +1,23 @@
+.framework-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 18px rgba(148, 163, 184, 0.2);
+}
+
+.framework-item h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.framework-item p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}

@@ -1,0 +1,15 @@
+.ui-button {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(120deg, #38bdf8, #6366f1);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.ui-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}

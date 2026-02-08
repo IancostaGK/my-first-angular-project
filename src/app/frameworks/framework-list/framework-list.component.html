@@ -1,0 +1,13 @@
+<div class="framework-list">
+  @if (items().length === 0) {
+    <p class="framework-list__empty">No results for "{{ query() }}".</p>
+  } @else {
+    <ul class="framework-list__grid">
+      @for (framework of items(); track framework) {
+        <li>
+          <app-framework-item [name]="framework" />
+        </li>
+      }
+    </ul>
+  }
+</div>

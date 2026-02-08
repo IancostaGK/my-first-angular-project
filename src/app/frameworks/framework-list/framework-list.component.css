@@ -1,0 +1,17 @@
+.framework-list__grid {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.framework-list__empty {
+  margin: 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px dashed #cbd5f5;
+  color: #475569;
+}
