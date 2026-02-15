@@ -1,6 +1,9 @@
-import { Component, NgZone, effect } from '@angular/core';
-import { FrameworkListComponent } from './framework-list/framework-list.component';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { FrameworkListComponent } from './framework-list/framework-list.component';
+import { FrameworkService } from './framework.service';
+import { ExploreEventService } from './explore-event.service';
 
 @Component({
   selector: 'app-frameworks-page',
@@ -9,53 +12,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './frameworks-page.component.css',
 })
 export class FrameworksPageComponent {
-  protected query = '';
+  private readonly frameworkService = inject(FrameworkService);
+  private readonly exploreEventService = inject(ExploreEventService);
 
-  private readonly allFrameworks = [
-    'Angular',
-    'React',
-    'Vue',
-    'Svelte',
-    'Solid',
-    'Qwik',
-    'Preact',
-    'Ember',
-    'Backbone',
-    'Lit',
-    'Alpine',
-    'Next.js',
-    'Nuxt',
-    'Remix',
-    'Astro',
-  ];
+  // toSignal() converts an Observable into a Signal — auto-unsubscribes when component is destroyed
+  protected readonly lastExplored = toSignal(this.exploreEventService.explored$);
+
+  protected query = this.frameworkService.getSavedQuery();
 
   protected get filteredFrameworks() {
-    const term = this.query.trim().toLowerCase();
-    if (!term) return this.allFrameworks;
-    return this.allFrameworks.filter(name => name.toLowerCase().includes(term));
+    return this.frameworkService.filter(this.query);
   }
 
   protected onQueryChange(value: string) {
     this.query = value;
+    this.frameworkService.saveQuery(value);
   }
 
   protected clearQuery() {
     this.query = '';
-  }
-
-  ngOnInit() {
-    // Initialize query from localStorage if available
-    const savedQuery = localStorage.getItem('framework-query');
-    if (savedQuery) {
-      this.query = savedQuery;
-    }
-  }
-
-  constructor(private readonly zone: NgZone) {
-    // Vue watch: react to query changes (e.g., persist or side effects)
-    effect(() => {
-      const value = this.query;
-      localStorage.setItem('framework-query', value);
-    });
+    this.frameworkService.saveQuery('');
   }
 }

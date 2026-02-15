@@ -12,14 +12,12 @@
       aria-label="Filter frameworks"
       [(ngModel)]="query"
     />
-    {{  query }}
-    <button type="button" class="frameworks__clear" (click)="clearQuery()">
-      Clear
-    </button>
+    <button type="button" class="frameworks__clear" (click)="clearQuery()">Clear</button>
   </div>
 
-  <app-framework-list
-    [items]="filteredFrameworks"
-    [query]="query"
-  />
+  @if (lastExplored()) {
+    <p class="frameworks__last-explored">Last explored: <strong>{{ lastExplored() }}</strong></p>
+  }
+
+  <app-framework-list [items]="filteredFrameworks" [query]="query" />
 </section>
